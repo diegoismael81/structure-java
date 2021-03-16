@@ -5,7 +5,6 @@
  */
 package demolistlinked;
 
-import structure.DoublyListLinked;
 import structure.ListLinked;
 
 /**
@@ -41,16 +40,7 @@ public class DemoListLinked {
         System.out.println();
         System.out.println();
         
-        System.out.println("-- Lista doblemente enlazada --");
-        System.out.println("1° Ejemplo");
-        DoublyListLinked<String> listDLLString = new DoublyListLinked<>();
-        listDLLString.addNode("A");
-        listDLLString.addNode("B");
-        listDLLString.addNode("C");
-        listDLLString.addNode("D");
-        System.out.println(listDLLString.toString());
-        System.out.printf("Tamaño :%d" , listDLLString.getSize());        
-        System.out.println();        
+             
         
     }    
 }
