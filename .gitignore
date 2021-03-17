@@ -18,3 +18,4 @@ bin-release/
 # information for Eclipse / Flash Builder.
 /DemoDoublyListLinked/nbproject/private/
 /DemoGraph/nbproject/private/
+/DemoGraph/build/
