@@ -26,7 +26,7 @@ public class DoublyListLinked<E> {
         return tail;
     }
 
-    public void addNode(E data) {
+    public DLLNode<E> addNode(E data) {
         DLLNode<E> newNode = new DLLNode<>(data);
         if (size == 0) { //Si la lista está vacía
             head = newNode;            
@@ -36,6 +36,7 @@ public class DoublyListLinked<E> {
         }        
         tail = newNode;
         size++;
+        return newNode;
     }
 
     public int getSize() {

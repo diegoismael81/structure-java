@@ -5,9 +5,9 @@
  */
 package demograph;
 
-import graph.Edge;
+import graph.Graph;
 import graph.Vertex;
-import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -15,43 +15,75 @@ import java.util.List;
  */
 public class DemoGraph {
 
-    
-    private static void getNeighbors(Vertex<String> vertex){
-        List<Vertex<String>> neighbors = vertex.getNeighbors();
-        System.out.printf("Vértices vecinos de %s", vertex.getData());
+    private static Graph graph = new Graph();
+    private static Scanner sc = new Scanner(System.in);
+
+    private static void addVertex(int index) {
+        System.out.printf("Vértice #%d", index);
         System.out.println();
-        for(Vertex<String> v : neighbors){
-            System.out.println(v.toString());
-        }
-        System.out.println();
+        System.out.print("Ingrese el nombre: ");
+        String n = sc.next();
+        graph.addVertex(n);
     }
-    
+
+    private static Vertex<String> findVertex(String message) {
+        int vertexId;
+        Vertex<String> result = null;
+        do {
+            System.out.print(message);
+            vertexId = sc.nextInt();
+            result = graph.getVertexById(vertexId);
+        } while (result == null);
+        return result;
+    }
+
+    private static void addEdges() {
+        String option;
+        String label;
+        int weigth = 0;
+        int index = 1;
+        do {
+            System.out.printf("Arista #%d", index);
+            System.out.println();
+            Vertex<String> v1 = findVertex("Ingrese el vértice 1: ");
+            Vertex<String> v2 = findVertex("Ingrese el vértice 2: ");
+            if (!v1.getData().equals(v2.getData())) {
+                System.out.print("Ingrese la etiqueta de la arista: ");
+                label = sc.next();
+                System.out.print("Ingrese el peso de la arista: ");
+                weigth = sc.nextInt();
+                graph.addEdge(v1, v2, label, weigth);
+                index++;
+            } else {
+                System.out.print("No es permitido crear una arista entre el mismo vértice");
+            }
+            System.out.print("Continuar S/N......");
+            option = sc.next();
+        } while (!"N".equals(option) && !"n".equals(option));
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("-- Ejemplo de grafo con DLL --");
-        System.out.println("Vértices: A - B - C - D");
-        
-        Vertex<String> vA = new Vertex<>("A", 1);
-        Vertex<String> vB = new Vertex<>("B", 2);
-        Vertex<String> vC = new Vertex<>("C", 3);
-        Vertex<String> vD = new Vertex<>("D", 4);
-        Vertex<String> vG = new Vertex<>("G", 5);
-        
-        new Edge<>(vA, vB, 7, "Kms");
-        new Edge<>(vA, vC, 5, "Kms");
-        new Edge<>(vC, vB, 11, "Kms");
-        new Edge<>(vB, vD, 4, "Kms");   
-        new Edge<>(vD, vA, 14, "Kms");
-        new Edge<>(vB, vG, 20, "Kms");
-        
-        getNeighbors(vA);
-        getNeighbors(vB);
-        getNeighbors(vC);
-        getNeighbors(vD);
-        getNeighbors(vG);
-               
+        System.out.println("-- Implementación de Grafos --");
+        System.out.print("Ingrese el número de vértices: ");
+        int numVertex = sc.nextInt();
+        for (int i = 1; i <= numVertex; i++) {
+            addVertex(i);
+        }
+        System.out.println(graph.toString());        
+        addEdges();
+        //graph.getAllNeighbors();
+        System.out.println(graph.toString());
+        ///
+        System.out.println("-- Lema del apretón de manos --");
+        int sumGrades = graph.getSumVertexGrades();
+        System.out.printf("Sumatoria del grado de los vértices: %d", sumGrades);
+        System.out.println();
+        int twiceEdges = graph.getNumberEdges() * 2;
+        System.out.printf("2 veces el número de artistas: %d", twiceEdges);
+        System.out.println();        
     }
-    
+
 }

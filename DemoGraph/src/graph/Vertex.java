@@ -109,9 +109,13 @@ public class Vertex<E> {
         return neighbors;
     }
 
+    public int getGrade(){        
+        return this.outEdges.getSize() + this.inEdges.getSize();
+    }
+    
     @Override
     public String toString() {
-        return "[" + data + ']';
+        return "id:" + id +" [" + data + ']' + "grado:" + this.getGrade();
     }
 
 }
