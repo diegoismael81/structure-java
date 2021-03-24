@@ -21,11 +21,13 @@ public class Vertex<E> {
     private DoublyListLinked<Edge<E>> inEdges;
     private DoublyListLinked<Edge<E>> outEdges;
     private DLLNode<Vertex<E>> position;
+    private boolean visited;
 
     public Vertex(E data, DLLNode<Vertex<E>> position, int id) {
         this.data = data;
         this.position = position;
         this.id = id;
+        this.visited = false;
     }
 
     public Vertex(E data, int id) {
@@ -33,6 +35,7 @@ public class Vertex<E> {
         this.id = id;
         inEdges = new DoublyListLinked<>();
         outEdges = new DoublyListLinked<>();
+        this.visited = false;
     }
 
     public int getId() {
@@ -66,6 +69,19 @@ public class Vertex<E> {
     public DoublyListLinked<Edge<E>> getOutEdges() {
         return outEdges;
     }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+    
+    public boolean getVisited(){
+        return this.visited;
+    }   
+    
 
     public void addInEdge(Edge<E> e) {
         inEdges.addNode(e);

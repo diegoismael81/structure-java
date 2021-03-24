@@ -6,7 +6,9 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import structure.DLLNode;
 import structure.DoublyListLinked;
 
@@ -116,8 +118,24 @@ public class Graph<E> {
         return result;
     }
     
-    
-    
+    public List<Vertex<E>> BFS(Vertex<E> start){
+        List<Vertex<E>> result =  new ArrayList<>();
+        Queue<Vertex<E>> queue = new LinkedList<Vertex<E>>();        
+        queue.add(start); //El vértice inicial 'start' se agrega a la cola        
+        start.setVisited(true);
+        while(!queue.isEmpty()){ //El ciclo se repite mientras haya vértices en la cola
+            Vertex<E> vertexHead = queue.poll();            
+            result.add(vertexHead);
+            for(Vertex<E> n : vertexHead.getNeighbors()){
+                if(!n.getVisited()){
+                    n.setVisited(true);                    
+                    queue.add(n); 
+                }
+            }            
+        }
+        return result;
+    }
+        
     public int getNumberVertex(){
         return this.vertexList.getSize();
     }

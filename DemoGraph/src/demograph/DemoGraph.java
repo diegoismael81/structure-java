@@ -7,6 +7,7 @@ package demograph;
 
 import graph.Graph;
 import graph.Vertex;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -71,19 +72,36 @@ public class DemoGraph {
         int numVertex = sc.nextInt();
         for (int i = 1; i <= numVertex; i++) {
             addVertex(i);
-        }
-        System.out.println(graph.toString());        
+        }              
         addEdges();
-        //graph.getAllNeighbors();
+        
+        System.out.println("-- Vértices adyacentes --");
+        graph.getAllNeighbors();
+        
+        System.out.println("-- Grafo --");
         System.out.println(graph.toString());
-        ///
+        
         System.out.println("-- Lema del apretón de manos --");
         int sumGrades = graph.getSumVertexGrades();
+        
         System.out.printf("Sumatoria del grado de los vértices: %d", sumGrades);
         System.out.println();
         int twiceEdges = graph.getNumberEdges() * 2;
         System.out.printf("2 veces el número de artistas: %d", twiceEdges);
         System.out.println();        
+        
+        
+        System.out.println("-- Búsqueda en anchura BFS --");
+        Vertex<String> start = findVertex("Ingrese el vértice inicial: ");
+        List<Vertex<String>> bfs = graph.BFS(start);
+        for(Vertex<String> v : bfs){
+            System.out.println(v.toString());
+        }        
+        
+        
+        
+        
+        
     }
 
 }
