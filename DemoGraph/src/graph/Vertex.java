@@ -6,6 +6,8 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import structure.DLLNode;
 import structure.DoublyListLinked;
@@ -121,6 +123,13 @@ public class Vertex<E> {
                 i++;
             } while (i < this.inEdges.getSize());
         }
+
+        Collections.sort(neighbors, new Comparator<Vertex<E>>() {
+                @Override
+                public int compare(final Vertex<E> v1, final Vertex<E> v2) {
+                    return v1.getId() - v2.getId();
+                }
+            });               
 
         return neighbors;
     }

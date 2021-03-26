@@ -30,10 +30,16 @@ public class DemoGraph {
     private static Vertex<String> findVertex(String message) {
         int vertexId;
         Vertex<String> result = null;
-        do {
-            System.out.print(message);
-            vertexId = sc.nextInt();
-            result = graph.getVertexById(vertexId);
+        do {            
+            System.out.print(message);            
+            try{                
+                vertexId = sc.nextInt();
+                result = graph.getVertexById(vertexId);
+            }
+            catch(Exception ex){
+                System.out.println("Por nombre....");                            
+                result = graph.getVertexByData(sc.next());
+            }
         } while (result == null);
         return result;
     }
@@ -93,13 +99,21 @@ public class DemoGraph {
         
         System.out.println("-- Búsqueda en anchura BFS --");
         Vertex<String> start = findVertex("Ingrese el vértice inicial: ");
-        List<Vertex<String>> bfs = graph.BFS(start);
+        graph.BFS(start);        
+        List<Vertex<String>> bfs = graph.getBfs();
         for(Vertex<String> v : bfs){
             System.out.println(v.toString());
         }        
         
+        graph.reset();
         
-        
+        System.out.println("-- Búsqueda en profundidad DFS --");
+        start = findVertex("Ingrese el vértice inicial: ");
+        graph.DFS(start);        
+        List<Vertex<String>> dfs = graph.getDfs();
+        for(Vertex<String> v : dfs){
+            System.out.println(v.toString());
+        }                     
         
         
     }
